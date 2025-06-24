@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>テクノロジーニュース - 広告テストサイト</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 250px 1fr 250px;
+            gap: 20px;
+            padding: 20px;
+        }
+        .header {
+            grid-column: 1 / -1;
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .main-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .article {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .article h2 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .article p {
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* 広告スタイル */
+        .ad-banner {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin: 15px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .ad-banner::before {
+            content: "広告";
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 10px;
+            background: rgba(0,0,0,0.3);
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        .ad-sidebar {
+            background: #fff3cd;
+            border: 2px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .ad-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border: 3px solid #e74c3c;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: none;
+        }
+        .ad-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+        .close-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        .ad-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 200px;
+            height: 150px;
+            background: #ff9ff3;
+            border: 2px solid #ff7675;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 500;
+        }
+        .blinking {
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+        
+        /* 一般的な広告のクラス名 */
+        .advertisement, .ads, .ad-container, .google-ads, .adsense {
+            background: #ffeaa7;
+            border: 2px dashed #fdcb6e;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+            border-radius: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー広告 -->
+    <div class="ad-banner" id="header-ad">
+        <h3>🎉 特別セール開催中！ 🎉</h3>
+        <p>今すぐクリックして50%オフをゲット！</p>
+        <button style="background: #fff; color: #ff6b6b; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">今すぐ購入</button>
+    </div>
+
+    <div class="header">
+        <h1>テクノロジーニュース</h1>
+        <p>最新のIT・テクノロジー情報をお届け</p>
+    </div>
+
+    <div class="container">
+        <!-- 左サイドバー広告 -->
+        <div class="sidebar">
+            <div class="ad-sidebar advertisement">
+                <h4>おすすめ商品</h4>
+                <p>新型スマートフォン</p>
+                <p>特価：¥99,999</p>
+                <button style="background: #e17055; color: white; padding: 8px 15px; border: none; border-radius: 4px;">詳細を見る</button>
+            </div>
+            
+            <div class="ad-sidebar ads">
+                <h4>投資で稼ごう！</h4>
+                <p class="blinking">🚀 月利20%保証 🚀</p>
+                <button style="background: #00b894; color: white; padding: 8px 15px; border: none; border-radius: 4px;">今すぐ登録</button>
+            </div>
+            
+            <div class="ad-sidebar google-ads">
+                <h4>オンライン英会話</h4>
+                <p>初回レッスン無料</p>
+                <p>ネイティブ講師多数</p>
+                <button style="background: #6c5ce7; color: white; padding: 8px 15px; border: none; border-radius: 4px;">無料体験</button>
+            </div>
+        </div>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <div class="article">
+                <h2>AI技術の最新トレンド</h2>
+                <p>人工知能技術は急速に進歩しており、特に生成AIの分野では革新的な発展が続いています。ChatGPTやGPT-4などの大規模言語モデルが登場し、様々な業界でAI活用が進んでいます。</p>
+                <p>この技術革新により、プログラミング、ライティング、デザインなど多くの分野で効率化が図られています。しかし同時に、AI倫理やプライバシー保護についても重要な議論が続いています。</p>
+            </div>
+
+            <!-- 記事間広告 -->
+            <div class="advertisement" id="mid-article-ad">
+                <h3>💰 副業で月収30万円 💰</h3>
+                <p>在宅ワークで簡単に稼げる方法を教えます</p>
+                <button style="background: #e84393; color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer;">無料で始める</button>
+            </div>
+
+            <div class="article">
+                <h2>量子コンピューターの商用化</h2>
+                <p>IBM、Google、Microsoftなどの大手テクノロジー企業が量子コンピューターの実用化に向けて競争を繰り広げています。量子コンピューターは従来のコンピューターでは解決困難な問題を解く可能性を秘めています。</p>
+                <p>暗号化、薬品開発、金融モデリング、機械学習など、様々な分野での応用が期待されており、今後10年間で大きな変革をもたらす可能性があります。</p>
+            </div>
+
+            <!-- Google AdSense風広告 -->
+            <div class="adsense">
+                <h4>関連記事の広告</h4>
+                <div style="display: flex; gap: 15px; margin-top: 10px;">
+                    <div style="flex: 1; border: 1px solid #ddd; padding: 10px; border-radius: 4px;">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjYwIiB2aWV3Qm94PSIwIDAgMTAwIDYwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjY2NjIi8+Cjx0ZXh0IHg9IjUwIiB5PSIzNSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5BZCBJbWFnZTwvdGV4dD4KPHN2Zz4K" alt="Ad" style="width: 100%; height: auto;">
+                        <p style="font-size: 12px; margin: 5px 0;">プログラミング学習</p>
+                    </div>
+                    <div style="flex: 1; border: 1px solid #ddd; padding: 10px; border-radius: 4px;">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjYwIiB2aWV3Qm94PSIwIDAgMTAwIDYwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjY2NjIi8+Cjx0ZXh0IHg9IjUwIiB5PSIzNSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5BZCBJbWFnZTwvdGV4dD4KPHN2Zz4K" alt="Ad" style="width: 100%; height: auto;">
+                        <p style="font-size: 12px; margin: 5px 0;">クラウドサービス</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article">
+                <h2>Web3とブロックチェーン技術</h2>
+                <p>分散型ウェブ（Web3）の概念が注目を集めています。ブロックチェーン技術を基盤とした新しいインターネットの形態で、ユーザーがデータと資産をより直接的にコントロールできるようになります。</p>
+                <p>NFT、DeFi、DAOなどの新しい概念が生まれ、従来の中央集権型のサービスに代わる分散型のアプリケーションが開発されています。</p>
+            </div>
+        </div>
+
+        <!-- 右サイドバー広告 -->
+        <div class="sidebar">
+            <div class="ad-container">
+                <h4>🎮 新作ゲーム 🎮</h4>
+                <p>話題のRPGゲーム</p>
+                <p>基本プレイ無料</p>
+                <button style="background: #a29bfe; color: white; padding: 8px 15px; border: none; border-radius: 4px;">今すぐプレイ</button>
+            </div>
+            
+            <div class="ad-sidebar">
+                <h4>📚 オンライン学習</h4>
+                <p>プログラミングスクール</p>
+                <p>転職成功率95%</p>
+                <button style="background: #fd79a8; color: white; padding: 8px 15px; border: none; border-radius: 4px;">無料相談</button>
+            </div>
+            
+            <div class="ad-sidebar blinking">
+                <h4>⚡ 限定オファー ⚡</h4>
+                <p>残り時間: <span id="countdown">05:00</span></p>
+                <p>今だけ90%オフ！</p>
+                <button style="background: #e17055; color: white; padding: 8px 15px; border: none; border-radius: 4px;">今すぐ購入</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- フローティング広告 -->
+    <div class="ad-float" id="floating-ad">
+        <button onclick="closeFloat()" style="position: absolute; top: 5px; right: 5px; background: #ddd; border: none; border-radius: 50%; width: 20px; height: 20px; cursor: pointer;">×</button>
+        <h4 style="margin: 0 0 10px 0; color: #2d3436;">特別キャンペーン</h4>
+        <p style="margin: 0; font-size: 12px;">クリックで詳細を確認</p>
+    </div>
+
+    <!-- ポップアップ広告 -->
+    <div class="ad-overlay" id="popup-overlay"></div>
+    <div class="ad-popup" id="popup-ad">
+        <h3>🎁 おめでとうございます！ 🎁</h3>
+        <p>あなたが1000番目の訪問者です！</p>
+        <p>特別プレゼントを受け取るにはクリックしてください！</p>
+        <button class="close-btn" onclick="closePopup()">閉じる</button>
+    </div>
+
+    <!-- フッター広告 -->
+    <div class="ad-banner" style="margin-top: 30px;">
+        <h3>📧 メルマガ登録で特典ゲット 📧</h3>
+        <p>最新情報とお得なクーポンをお届けします</p>
+        <input type="email" placeholder="メールアドレス" style="padding: 10px; margin-right: 10px; border: none; border-radius: 4px;">
+        <button style="background: #fff; color: #4ecdc4; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">登録する</button>
+    </div>
+
+    <script src="ads-native.js"></script>
+    <script>
+        // ポップアップ広告を3秒後に表示
+        setTimeout(function() {
+            document.getElementById('popup-overlay').style.display = 'block';
+            document.getElementById('popup-ad').style.display = 'block';
+        }, 3000);
+
+        function closePopup() {
+            document.getElementById('popup-overlay').style.display = 'none';
+            document.getElementById('popup-ad').style.display = 'none';
+        }
+
+        function closeFloat() {
+            document.getElementById('floating-ad').style.display = 'none';
+        }
+
+        // カウントダウンタイマー
+        let timeLeft = 300; // 5分
+        function updateCountdown() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('countdown').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            if (timeLeft > 0) {
+                timeLeft--;
+                setTimeout(updateCountdown, 1000);
+            }
+        }
+        updateCountdown();
+
+        // 広告クリックイベント
+        document.querySelectorAll('.ad-banner, .ad-sidebar, .advertisement, .ads, .ad-container, .google-ads, .adsense').forEach(function(ad) {
+            ad.addEventListener('click', function() {
+                console.log('広告がクリックされました:', this.className);
+            });
+        });
+    </script>
+</body>
+</html>

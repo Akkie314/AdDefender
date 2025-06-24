@@ -1,0 +1,40 @@
+{
+    "manifest_version": 3,
+    "name": "Ad Defender",
+    "version": "1.0",
+    "description": "広告以外を消す拡張機能です。",
+    "icons": {
+        "16": "icons/16x16.png",
+        "32": "icons/32x32.png",
+        "48": "icons/48x48.png",
+        "128": "icons/128x128.png"
+    },
+    "permissions": [
+        "activeTab",
+        "scripting"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "Ad Defender - 広告のみ表示",
+        "default_icon": {
+            "16": "icons/16x16.png",
+            "32": "icons/32x32.png",
+            "48": "icons/48x48.png",
+            "128": "icons/128x128.png"
+        }
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "run_at": "document_start"
+        }
+    ]
+}
