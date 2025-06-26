@@ -20,7 +20,7 @@ const AD_DETECTION_CONSTANTS = {
     
     // 広告判定用のキーワード - これらが含まれていれば広告と判定
     AD_KEYWORDS: [
-        'ad', 'sponsor', 'advertisement', 'promo', 'promotion', 'google_ads'
+        'ads', 'sponsor', 'advertisement', 'promo', 'promotion', 'google_ads'
     ],
     
     // 広告配信ドメイン
