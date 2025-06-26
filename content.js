@@ -111,7 +111,6 @@ function checkAdByUrl(urls, adDomains, adUrlPatterns) {
         // ドメインチェック
         for (const domain of adDomains) {
             if (url.includes(domain)) {
-                console.log(`Ad detected by domain: ${domain} in ${url}`);
                 return true;
             }
         }
@@ -119,7 +118,6 @@ function checkAdByUrl(urls, adDomains, adUrlPatterns) {
         // URLパターンチェック
         for (const pattern of adUrlPatterns) {
             if (url.includes(pattern)) {
-                console.log(`Ad detected by URL pattern: ${pattern} in ${url}`);
                 return true;
             }
         }
@@ -144,11 +142,6 @@ function isAd(element) {
         attributeNames: applyExcludePatterns(elementData.attributeNames, AD_DETECTION_CONSTANTS.EXCLUDE_PATTERNS),
         urls: applyExcludePatterns(elementData.urls, AD_DETECTION_CONSTANTS.EXCLUDE_PATTERNS)
     };
-
-    // デバッグログ出力（低確率）
-    if (Math.random() < 0.001) {
-        console.log(`Checking element: ${element.tagName}, id: "${cleanedData.elementId}", classes: [${cleanedData.classNames.join(', ')}], urls: [${cleanedData.urls.join(', ')}]`);
-    }
 
     // 属性・クラス・IDベースでの広告判定
     if (checkAdByAttributes(cleanedData, AD_DETECTION_CONSTANTS.AD_KEYWORDS)) {
@@ -188,6 +181,7 @@ function hideAllElements(allElements) {
     allElements.forEach(element => {
         if (!ALWAYS_VISIBLE_TAGS.includes(element.tagName)) {
             element.style.opacity = '0';
+            element.style.pointerEvents = 'none';
         }
     });
 }
@@ -210,7 +204,6 @@ function collectAdElements(allElements) {
     // 広告要素とその関連要素を収集
     allElements.forEach(element => {
         if (isAd(element)) {
-            console.log(`Ad element found: ${element.tagName}#${element.id}.${Array.from(element.classList).join('.')}`);
             
             // 広告要素自体を追加
             adElementsSet.add(element);
@@ -240,6 +233,7 @@ function collectAdElements(allElements) {
 function showElements(elementsSet) {
     elementsSet.forEach(element => {
         element.style.opacity = '1';
+        element.style.pointerEvents = 'auto';
     });
 }
 
@@ -248,7 +242,6 @@ function showElements(elementsSet) {
  */
 function hideNonAdElements() {
     const allElements = document.querySelectorAll("*");
-    console.log(`Found ${allElements.length} elements on the page.`);
     
     // Step 1: すべての要素を非表示にする（基本要素は除く）
     hideAllElements(allElements);
@@ -258,22 +251,19 @@ function hideNonAdElements() {
     
     // Step 3: 広告関連要素のみを表示する
     showElements(adElementsSet);
-    
-    console.log(`Ad Defender: Found ${adCount} ad elements. Made ${adElementsSet.size} elements visible (ads + parents + children + basic elements).`);
 }
 
 // メッセージリスナー：background scriptからの実行指示を受信
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === 'startAdDefender') {
-        console.log("Ad Defender: Starting ad detection via user click...");
         
         // 非同期でメイン処理を実行
         requestAnimationFrame(() => {
             hideNonAdElements();
         });
-        
-        // 即座にも実行（フォールバック）
+
         hideNonAdElements();
+        
         
         // レスポンスを送信
         sendResponse({status: 'Ad Defender activated'});
